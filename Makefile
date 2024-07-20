@@ -1,5 +1,8 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude
+# ifeq ($(shell uname -s),Darwin)
+#     CFLAGS += -framework Cocoa -framework OpenGL -framework IOKit
+# endif
 
 NAME = so_long
 BUILD_DIR = build
@@ -17,7 +20,7 @@ MLX42 = $(MLX_BUILD_DIR)/libmlx42.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX42)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_BUILD_DIR) -lmlx42
+	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_BUILD_DIR) -lmlx42 -lglfw
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
