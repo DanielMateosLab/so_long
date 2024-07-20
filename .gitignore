@@ -5,3 +5,5 @@ test*
 .editorconfig
 *.dSYM
 **/build/
+so_long
+libs/libft/libft.a
