@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:04:55 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/25 22:03:42 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/25 23:17:04 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,23 @@ char	**ft_resize_str_arr(char **arr, size_t len, size_t new_len)
 	return (new_arr);
 }
 
+char	*get_next_line_without_nl(int fd)
+{
+	char	*temp_line;
+	char 	*res;
+	size_t	len;
+
+	temp_line = get_next_line(fd);
+	len = ft_strlen(temp_line);
+	if (temp_line && temp_line[len - 1] == '\n')
+	{
+		res = ft_substr(temp_line, 0, ft_strlen(temp_line) - 1);
+		ft_free((void **)&temp_line);
+		return (res);
+	}
+	return (temp_line);
+}
+
 char	**loop_map(size_t *_i, size_t *_lines, char **map, int fd)
 {
 	size_t	i;
@@ -49,7 +66,7 @@ char	**loop_map(size_t *_i, size_t *_lines, char **map, int fd)
 
 	i = *_i;
 	lines = *_lines;
-	map[i] = get_next_line(fd);
+	map[i] = get_next_line_without_nl(fd);
 	while (map[i++])
 	{
 		if (i == lines - 2)
@@ -59,7 +76,7 @@ char	**loop_map(size_t *_i, size_t *_lines, char **map, int fd)
 			if (!map)
 				return (NULL);
 		}
-		map[i] = get_next_line(fd);
+		map[i] = get_next_line_without_nl(fd);
 	}
 	*_i = i;
 	*_lines = lines;
