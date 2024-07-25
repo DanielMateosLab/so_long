@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:04:55 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/25 21:07:30 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/25 22:03:42 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	*ft_clear_str_arr(char **table)
 
 char	**ft_resize_str_arr(char **arr, size_t len, size_t new_len)
 {
-	char	*new_arr;
+	char	**new_arr;
 	size_t	i;
 
-	new_arr = ft_calloc(new_len, sizeof(char));
+	new_arr = (char **)ft_calloc(new_len, sizeof(char *));
 	if (!new_arr)
 		return (ft_clear_str_arr(arr));
 	i = 0;

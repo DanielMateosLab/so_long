@@ -1,6 +1,5 @@
 .vscode
 a.*
-test*
 *.swp
 .editorconfig
 *.dSYM
