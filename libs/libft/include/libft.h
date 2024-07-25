@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 20:08:06 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/06 16:01:54 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:40:13 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,17 @@ t_hm_node		*ft_hm_node_insert(
 void			ft_hm_node_remove(t_hashmap *hm, const char *key);
 void			*ft_hm_get(t_hashmap *hm, const char *key);
 void			ft_hm_remove(t_hashmap *hm);
+/**
+ * @brief Reads the next line from a file descriptor.
+ *
+ * This function reads the next line from the file descriptor specified by `fd`.
+ * It uses a static buffer to store the contents read from the file descriptor.
+ * The buffer size is defined by `BUFFER_SIZE`.
+ *
+ * @param fd The file descriptor to read from.
+ * @return A pointer to the next line read from the file descriptor,
+ * or NULL if an error occurs or the end of file is reached.
+ */
+char			*get_next_line(int fd);
 
 #endif
