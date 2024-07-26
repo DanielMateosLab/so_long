@@ -6,11 +6,35 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 19:57:35 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/26 20:19:31 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/26 20:28:19 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+// TODO: move to libft
+#include <stdarg.h>
+
+int	ft_char_any_of(char target, int num_args, ...)
+{
+	va_list	args;
+	char	current;
+	int		i;
+
+	va_start(args, num_args);
+	i = 0;
+	while (i < num_args)
+	{
+		current = va_arg(args, int);
+		if (target == current)
+		{
+			va_end(args);
+			return (1);
+		}
+		i++;
+	}
+	va_end(args);
+	return (0);
+}
 
 int	is_rectangle_map(char **map)
 {
