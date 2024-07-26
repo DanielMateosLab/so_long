@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/26 19:48:43 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:59:13 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 char	**read_map(const char *path);
 void	*ft_clear_str_arr(char **table);
+char	**is_valid_map(char **map);
 
 typedef struct s_game
 {
