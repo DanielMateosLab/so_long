@@ -32,16 +32,18 @@ include_directories(
 	"${MLX_DIR}/include"
 )
 
-include(ExternalProject)
-
-ExternalProject_Add(
-    so_long_project
-    SOURCE_DIR ${PARENT_DIR}
-    CONFIGURE_COMMAND ""  # No configure step
-    BUILD_COMMAND make -C ${PARENT_DIR} -j4
-    INSTALL_COMMAND ""    # No install step
+# Main executable dor e2e tests
+file(GLOB_RECURSE SO_LONG_SOURCES
+    "${PARENT_DIR}/src/*.c"
+    "${PARENT_DIR}/include/*.h"
+    "${PARENT_DIR}/Makefile"  # Include the Makefile as well
 )
 
+add_custom_target(so_long_project ALL
+    COMMAND make -C ${PARENT_DIR} -j4
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPENDS ${SO_LONG_SOURCES}
+)
 
 file(GLOB sources "${PARENT_DIR}/src/*.c")
 list(REMOVE_ITEM sources "${PARENT_DIR}/src/main.c")
