@@ -60,3 +60,8 @@ TEST_F(ExecutableTest, EmptyMap) {
 	std::string output = runExecutable("../../maps/empty.ber");
 	ASSERT_CONTAINS(output, EMPTY_MAP_ERR);
 }
+
+TEST_F(ExecutableTest, NotRectangleMap) {
+	std::string output = runExecutable("../../maps/not_rectangle.ber");
+	ASSERT_CONTAINS(output, RECT_MAP_ERR);
+}
