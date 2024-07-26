@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:04:55 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/25 23:17:04 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:09:17 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**ft_resize_str_arr(char **arr, size_t len, size_t new_len)
 char	*get_next_line_without_nl(int fd)
 {
 	char	*temp_line;
-	char 	*res;
+	char	*res;
 	size_t	len;
 
 	temp_line = get_next_line(fd);
@@ -83,7 +83,7 @@ char	**loop_map(size_t *_i, size_t *_lines, char **map, int fd)
 	return (map);
 }
 
-char	**read_map(char *path)
+char	**read_map(const char *path)
 {
 	char	**map;
 	int		fd;

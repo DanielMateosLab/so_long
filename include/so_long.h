@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/25 22:56:47 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:07:55 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define PATH_ERR "Error\nThere is not a valid path\n"
 # define READ_MAP_ERR "Error\nError reading the map\n"
 
-char	**read_map(char *path);
+char	**read_map(const char *path);
 void	*ft_clear_str_arr(char **table);
 
 typedef struct s_game

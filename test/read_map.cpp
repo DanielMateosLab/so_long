@@ -13,7 +13,7 @@ int map_length(char **map) {
 	return length;
 }
 
-char *path = "../../maps/42.ber";
+const char path[] = "../../maps/42.ber";
 
 class MapTest : public ::testing::Test {
 protected:
@@ -28,19 +28,15 @@ protected:
 	}
 };
 
-TEST_F(MapTest, read_map_ok) {
+TEST_F(MapTest, ReadMapOk) {
 	ASSERT_NE(map, nullptr);
 }
 
-TEST_F(MapTest, read_length_ok) {
+TEST_F(MapTest, ReadLength) {
 	ASSERT_EQ(map_length(map), 11);
 }
 
-TEST_F(MapTest, read_length_ko) {
-	ASSERT_NE(map_length(map), 10);
-}
-
-TEST_F(MapTest, check_map_content) {
+TEST_F(MapTest, ReadsMapContent) {
     std::ifstream file(path);
     ASSERT_TRUE(file.is_open()) << "Failed to open the file.";
 
@@ -54,7 +50,12 @@ TEST_F(MapTest, check_map_content) {
     file.close();
 }
 
-TEST(wrong_path, ok) {
-	char *path = "wrong_path";
+TEST(NullReturn, WrongPath) {
+	const char path[] = "wrong_path";
+	ASSERT_EQ(read_map(path), nullptr);
+}
+
+TEST(NullReturn, EmptyMap) {
+	const char path[] = "../../maps/empty.ber";
 	ASSERT_EQ(read_map(path), nullptr);
 }
