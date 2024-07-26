@@ -32,6 +32,17 @@ include_directories(
 	"${MLX_DIR}/include"
 )
 
+include(ExternalProject)
+
+ExternalProject_Add(
+    so_long_project
+    SOURCE_DIR ${PARENT_DIR}
+    CONFIGURE_COMMAND ""  # No configure step
+    BUILD_COMMAND make -C ${PARENT_DIR} -j4
+    INSTALL_COMMAND ""    # No install step
+)
+
+
 file(GLOB sources "${PARENT_DIR}/src/*.c")
 list(REMOVE_ITEM sources "${PARENT_DIR}/src/main.c")
 
