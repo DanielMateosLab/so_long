@@ -82,7 +82,7 @@ foreach(file ${tests})
 		${sources}
 		${file}
 		"${PROJECT_SOURCE_DIR}/main.cpp")
-	add_dependencies(${name}_tests libft mlx42)
+	add_dependencies(${name}_tests libft mlx42 so_long_project)
 	target_link_libraries(
 		"${name}_tests" gtest_main
   		${LIBFT_DIR}/libft.a
