@@ -55,7 +55,9 @@ TEST(NullReturn, WrongPath) {
 	ASSERT_EQ(read_map(path), nullptr);
 }
 
-TEST(NullReturn, EmptyMap) {
+TEST(EmptyMap, NonNullPtr) {
 	const char path[] = "../../maps/empty.ber";
-	ASSERT_EQ(read_map(path), nullptr);
+	char **map = read_map(path);
+	ASSERT_NE(map, nullptr);
+	ft_clear_str_arr(map);
 }

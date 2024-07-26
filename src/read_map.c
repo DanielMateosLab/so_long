@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:04:55 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/26 18:09:17 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:49:14 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,13 @@ char	**read_map(const char *path)
 	lines = 20;
 	i = 0;
 	fd = open(path, O_RDONLY);
-	if (!fd)
-		return (NULL);
+	if (fd == -1)
+		return (ft_printf(PATH_ERR), NULL);
 	map = (char **)ft_calloc(lines, sizeof(char *));
 	if (!map)
-		return (NULL);
+		return (ft_printf(READ_MAP_ERR), NULL);
 	loop_map(&i, &lines, map, fd);
 	close(fd);
-	if (!map[0])
-		return (ft_clear_str_arr(map));
 	if (i < lines - 2)
 		map = ft_resize_str_arr(map, lines, i);
 	return (map);

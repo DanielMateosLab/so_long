@@ -32,22 +32,31 @@ protected:
     }
 };
 
+#define ASSERT_CONTAINS(haystack, needle) \
+    EXPECT_NE(haystack.find(needle), std::string::npos) \
+        << "Expected to find '" << needle << "' in:\n" << haystack
+
 TEST_F(ExecutableTest, NoArgs) {
     std::string output = runExecutable("");
-    EXPECT_NE(output.find(ARGC_ERR), std::string::npos);
+    ASSERT_CONTAINS(output, ARGC_ERR);
 }
 
 TEST_F(ExecutableTest, TooManyArgs) {
     std::string output = runExecutable("arg1 arg2");
-    EXPECT_NE(output.find(ARGC_ERR), std::string::npos);
+    ASSERT_CONTAINS(output, ARGC_ERR);
 }
 
 TEST_F(ExecutableTest, InvalidExtension) {
     std::string output = runExecutable("invalid_extension.txt");
-    EXPECT_NE(output.find(FILE_EXT_ERR), std::string::npos);
+    ASSERT_CONTAINS(output, FILE_EXT_ERR);
 }
 
-TEST_F(ExecutableTest, ReadMapError) {
+TEST_F(ExecutableTest, PathErr) {
     std::string output = runExecutable("non_existing_map_path.ber");
-    EXPECT_NE(output.find(READ_MAP_ERR), std::string::npos);
+    ASSERT_CONTAINS(output, PATH_ERR);
+}
+
+TEST_F(ExecutableTest, EmptyMap) {
+	std::string output = runExecutable("../../maps/empty.ber");
+	ASSERT_CONTAINS(output, EMPTY_MAP_ERR);
 }
