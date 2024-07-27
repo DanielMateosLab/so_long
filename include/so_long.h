@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 18:28:49 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 22:40:25 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	save_begin(char **map, t_point *begin);
 void	*str_array_clear(char **table);
 char	**str_array_copy(char **map);
 char	**str_array_resize(char **arr, size_t len, size_t new_len);
+size_t	str_array_len(char **arr);
 
 #endif

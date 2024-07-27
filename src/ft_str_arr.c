@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 18:22:48 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 18:28:47 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 23:07:38 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,35 @@ char	**str_array_resize(char **arr, size_t len, size_t new_len)
 	return (new_arr);
 }
 
+size_t	str_array_len(char **arr)
+{
+	size_t	len;
+
+	len = 0;
+	while (arr[len])
+		len++;
+	return (len);
+}
+
 char	**str_array_copy(char **arr)
 {
-// TODO: implement
+	char	**new_arr;
+	size_t	arr_len;
+	size_t	i;
+
+	if (!arr)
+		return (NULL);
+	arr_len = str_array_len(arr);
+	new_arr = (char **)ft_calloc(arr_len + 1, sizeof(char *));
+	if (!new_arr)
+		return (NULL);
+	i = 0;
+	while (i < arr_len)
+	{
+		new_arr[i] = ft_strdup(arr[i]);
+		if (!new_arr[i])
+			return (str_array_clear(new_arr));
+		i++;
+	}
+	return (new_arr);
 }
