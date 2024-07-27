@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map.c                                     :+:      :+:    :+:   */
+/*   ft_char_any_of.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 19:57:35 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 15:02:28 by damateos         ###   ########.fr       */
+/*   Created: 2024/07/27 14:59:01 by damateos          #+#    #+#             */
+/*   Updated: 2024/07/27 14:59:30 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-int	is_rectangle_map(char **map)
+int	ft_char_any_of(char target, int num_args, ...)
 {
-	size_t	len;
+	va_list	args;
+	char	current;
 	int		i;
 
-	len = ft_strlen(map[0]);
-	i = 1;
-	while (map[i])
+	va_start(args, num_args);
+	i = 0;
+	while (i < num_args)
 	{
-		if (ft_strlen(map[i]) != len)
-			return (0);
+		current = va_arg(args, int);
+		if (target == current)
+		{
+			va_end(args);
+			return (1);
+		}
 		i++;
 	}
-	return (1);
-}
-
-char	**is_valid_map(char **map)
-{
-	if (!map[0])
-		return (ft_printf(EMPTY_MAP_ERR), NULL);
-	if (!is_rectangle_map(map))
-		return (ft_printf(RECT_MAP_ERR), NULL);
-	return (map);
+	va_end(args);
+	return (0);
 }

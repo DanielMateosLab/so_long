@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 20:08:06 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/25 22:52:15 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:00:55 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void			ft_hm_remove(t_hashmap *hm);
  * or NULL if an error occurs or the end of file is reached.
  */
 char			*get_next_line(int fd);
+int				ft_char_any_of(char target, int num_args, ...);
 
 #endif

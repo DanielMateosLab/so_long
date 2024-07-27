@@ -20,7 +20,7 @@ src/ft_memset.c src/ft_putchar_fd.c src/ft_putendl_fd.c src/ft_putnbr_fd.c src/f
 src/ft_split.c src/ft_strchr.c src/ft_strdup.c src/ft_striteri.c src/ft_strjoin.c src/ft_strlcat.c \
 src/ft_strlcpy.c src/ft_strlen.c src/ft_strmapi.c src/ft_strncmp.c \
 src/ft_strnstr.c src/ft_strrchr.c src/ft_strtrim.c src/ft_substr.c src/ft_tolower.c src/ft_toupper.c \
-src/ft_hashmap.c src/ft_hm_node.c src/ft_free.c 
+src/ft_hashmap.c src/ft_hm_node.c src/ft_free.c src/ft_char_any_of.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
