@@ -65,3 +65,8 @@ TEST_F(ExecutableTest, NotRectangleMap) {
 	std::string output = runExecutable("../../maps/not_rectangle.ber");
 	ASSERT_CONTAINS(output, RECT_MAP_ERR);
 }
+
+TEST_F(ExecutableTest, ForbiddenComponent) {
+	std::string output = runExecutable("../../maps/forbidden_component.ber");
+	ASSERT_CONTAINS(output, COMPONENTS_ERR);
+}

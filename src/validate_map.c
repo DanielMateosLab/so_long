@@ -6,11 +6,31 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 19:57:35 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 15:02:28 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:16:30 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+char	has_forbidden_components(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (!ft_char_any_of(map[i][j], 5, '0', '1', 'C', 'E', 'P'))
+				return (map[i][j]);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	is_rectangle_map(char **map)
 {
@@ -34,5 +54,7 @@ char	**is_valid_map(char **map)
 		return (ft_printf(EMPTY_MAP_ERR), NULL);
 	if (!is_rectangle_map(map))
 		return (ft_printf(RECT_MAP_ERR), NULL);
+	if (has_forbidden_components(map))
+		return (ft_printf(COMPONENTS_ERR), NULL);
 	return (map);
 }
