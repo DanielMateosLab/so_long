@@ -7,7 +7,7 @@ CFLAGS = -Wall -Wextra -Werror -Iinclude
 NAME = so_long
 BUILD_DIR = build
 
-SRCS = src/main.c src/read_map.c src/validate_map.c
+SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 LIBFT_DIR = libs/libft

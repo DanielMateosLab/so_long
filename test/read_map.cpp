@@ -15,7 +15,7 @@ int map_length(char **map) {
 
 const char path[] = "../../maps/42.ber";
 
-class MapTest : public ::testing::Test {
+class SaveBeginTest : public ::testing::Test {
 protected:
 	char **map;
 
@@ -28,15 +28,15 @@ protected:
 	}
 };
 
-TEST_F(MapTest, ReadMapOk) {
+TEST_F(SaveBeginTest, ReadMapOk) {
 	ASSERT_NE(map, nullptr);
 }
 
-TEST_F(MapTest, ReadLength) {
+TEST_F(SaveBeginTest, ReadLength) {
 	ASSERT_EQ(map_length(map), 11);
 }
 
-TEST_F(MapTest, ReadsMapContent) {
+TEST_F(SaveBeginTest, ReadsMapContent) {
     std::ifstream file(path);
     ASSERT_TRUE(file.is_open()) << "Failed to open the file.";
 
