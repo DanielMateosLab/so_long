@@ -70,3 +70,13 @@ TEST_F(ExecutableTest, ForbiddenComponent) {
 	std::string output = runExecutable("../../maps/forbidden_component.ber");
 	ASSERT_CONTAINS(output, COMPONENTS_ERR);
 }
+
+TEST_F(ExecutableTest, NotSurroundedByWalls1) {
+	std::string output = runExecutable("../../maps/not_surrounded_by_walls_1.ber");
+	ASSERT_CONTAINS(output, WALL_ERR);
+}
+
+TEST_F(ExecutableTest, NotSurroundedByWalls2) {
+	std::string output = runExecutable("../../maps/not_surrounded_by_walls_2.ber");
+	ASSERT_CONTAINS(output, WALL_ERR);
+}
