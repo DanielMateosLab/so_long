@@ -80,3 +80,29 @@ TEST_F(ExecutableTest, NotSurroundedByWalls2) {
 	std::string output = runExecutable("../../maps/not_surrounded_by_walls_2.ber");
 	ASSERT_CONTAINS(output, WALL_ERR);
 }
+
+TEST_F(ExecutableTest, ManyEntries) {
+	std::string output = runExecutable("../../maps/many_entries.ber");
+	ASSERT_CONTAINS(output, INVALID_TILES_COUNT_ERR);
+}
+
+TEST_F(ExecutableTest, ManyExits) {
+	std::string output = runExecutable("../../maps/many_exits.ber");
+	ASSERT_CONTAINS(output, INVALID_TILES_COUNT_ERR);
+}
+
+TEST_F(ExecutableTest, MissingEntry) {
+	std::string output = runExecutable("../../maps/missing_entry.ber");
+	ASSERT_CONTAINS(output, INVALID_TILES_COUNT_ERR);
+}
+
+TEST_F(ExecutableTest, MissingExit) {
+	std::string output = runExecutable("../../maps/missing_exit.ber");
+	ASSERT_CONTAINS(output, INVALID_TILES_COUNT_ERR);
+}
+
+TEST_F(ExecutableTest, MissingCollectable) {
+	std::string output = runExecutable("../../maps/missing_collectable.ber");
+	ASSERT_CONTAINS(output, INVALID_TILES_COUNT_ERR);
+}
+
