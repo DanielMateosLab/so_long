@@ -53,7 +53,7 @@ TEST_F(ExecutableTest, InvalidExtension) {
 
 TEST_F(ExecutableTest, PathErr) {
     std::string output = runExecutable("non_existing_map_path.ber");
-    ASSERT_CONTAINS(output, PATH_ERR);
+    ASSERT_CONTAINS(output, FILE_PATH_ERR);
 }
 
 TEST_F(ExecutableTest, EmptyMap) {
@@ -106,3 +106,22 @@ TEST_F(ExecutableTest, MissingCollectable) {
 	ASSERT_CONTAINS(output, INVALID_TILES_COUNT_ERR);
 }
 
+TEST_F(ExecutableTest, NoExitPath1) {
+	std::string output = runExecutable("../../maps/no_exit_path_1.ber");
+	ASSERT_CONTAINS(output, PATH_ERR);
+}
+
+TEST_F(ExecutableTest, NoExitPath2) {
+	std::string output = runExecutable("../../maps/no_exit_path_2.ber");
+	ASSERT_CONTAINS(output, PATH_ERR);
+}
+
+TEST_F(ExecutableTest, BlockedExit) {
+	std::string output = runExecutable("../../maps/blocked_exit.ber");
+	ASSERT_CONTAINS(output, PATH_ERR);
+}
+
+TEST_F(ExecutableTest, BlockedCollectable) {
+	std::string output = runExecutable("../../maps/blocked_col.ber");
+	ASSERT_CONTAINS(output, PATH_ERR);
+}

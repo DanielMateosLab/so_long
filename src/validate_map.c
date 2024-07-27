@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 19:57:35 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 16:17:02 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/28 00:06:43 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,7 @@ char	**is_valid_map(char **map)
 		return (ft_printf(WALL_ERR), NULL);
 	if (!has_valid_tile_counts(map))
 		return (ft_printf(INVALID_TILES_COUNT_ERR), NULL);
+	if (!has_exit(map, w, h))
+		return (ft_printf(PATH_ERR), NULL);
 	return (map);
 }

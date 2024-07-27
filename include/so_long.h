@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 23:35:43 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/28 00:06:26 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define WALL_ERR "Error\nThe map is not surrounded by walls\n"
 # define INVALID_TILES_COUNT_ERR "Error\nMap should countain one exit,\
  at least one object and the initial position\n"
-# define PATH_ERR "Error\nThere is not a valid path\n"
+# define FILE_PATH_ERR "Error\nNo file in the given path.\n"
+# define PATH_ERR "Error\nThe map can not be solved!\n"
 # define READ_MAP_ERR "Error\nError reading the map.\n"
 # define MAP_EXIT 'E'
 # define MAP_INITIAL_POS 'P'
@@ -59,12 +60,12 @@ typedef struct s_point
 char	**read_map(const char *path);
 char	**is_valid_map(char **map);
 void	save_begin(char **map, t_point *begin);
+int		has_exit(char **map, int w, int h);
 
 // TODO: move to libft
 void	*str_array_clear(char **table);
 char	**str_array_copy(char **map);
 char	**str_array_resize(char **arr, size_t len, size_t new_len);
 size_t	str_array_len(char **arr);
-int	has_exit(char **map, int w, int h);
 
 #endif
