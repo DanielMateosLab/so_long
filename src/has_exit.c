@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:22:01 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 18:28:38 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:37:50 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ int	has_exit(char **map, int w, int h)
 
 	size.x = w;
 	size.y = h;
-	save_begin(map, &begin);
 	map_cpy = str_array_copy(map);
+	save_begin(map_cpy, &begin);
 	if (
-		!found_exit(map, &size, begin.x - 1, begin.y)
-		|| !found_exit(map, &size, begin.x + 1, begin.y)
-		|| !found_exit(map, &size, begin.x, begin.y - 1)
-		|| !found_exit(map, &size, begin.x, begin.y + 1)
+		!found_exit(map_cpy, &size, begin.x - 1, begin.y)
+		|| !found_exit(map_cpy, &size, begin.x + 1, begin.y)
+		|| !found_exit(map_cpy, &size, begin.x, begin.y - 1)
+		|| !found_exit(map_cpy, &size, begin.x, begin.y + 1)
 	)
 		return (0);
-	// TODO: Reset flood cells
+	str_array_clear(map_cpy);
 	return (1);
 }
