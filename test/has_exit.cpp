@@ -22,7 +22,7 @@ protected:
 	}
 
 	void TearDown() override {
-		ft_clear_str_arr(map);
+		str_array_clear(map);
 	}
 };
 

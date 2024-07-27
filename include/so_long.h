@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 17:35:53 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:28:49 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define MAP_COLLECTABLE 'C'
 # define MAP_WALL '1'
 # define MAP_FLOOR '0'
+# define MAP_FLOOD 'F'
 
 typedef struct s_game
 {
@@ -56,8 +57,12 @@ typedef struct s_point
 }	t_point;
 
 char	**read_map(const char *path);
-void	*ft_clear_str_arr(char **table);
 char	**is_valid_map(char **map);
 void	save_begin(char **map, t_point *begin);
+
+// TODO: move to libft
+void	*str_array_clear(char **table);
+char	**str_array_copy(char **map);
+char	**str_array_resize(char **arr, size_t len, size_t new_len);
 
 #endif

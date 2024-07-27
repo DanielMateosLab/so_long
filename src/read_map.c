@@ -6,41 +6,11 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:04:55 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/26 19:49:14 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:28:47 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	*ft_clear_str_arr(char **table)
-{
-	size_t	i;
-
-	i = 0;
-	while (table[i])
-		ft_free((void **)&table[i++]);
-	return (ft_free((void **)&table));
-}
-
-char	**ft_resize_str_arr(char **arr, size_t len, size_t new_len)
-{
-	char	**new_arr;
-	size_t	i;
-
-	new_arr = (char **)ft_calloc(new_len, sizeof(char *));
-	if (!new_arr)
-		return (ft_clear_str_arr(arr));
-	i = 0;
-	while (i < len && i < new_len)
-	{
-		new_arr[i] = arr[i];
-		i++;
-	}
-	while (i < len)
-		ft_free((void **)&arr[i++]);
-	ft_free((void **)&arr);
-	return (new_arr);
-}
 
 char	*get_next_line_without_nl(int fd)
 {
@@ -71,7 +41,7 @@ char	**loop_map(size_t *_i, size_t *_lines, char **map, int fd)
 	{
 		if (i == lines - 2)
 		{
-			map = ft_resize_str_arr(map, lines, lines + 20);
+			map = str_array_resize(map, lines, lines + 20);
 			lines += 20;
 			if (!map)
 				return (NULL);
@@ -101,6 +71,6 @@ char	**read_map(const char *path)
 	loop_map(&i, &lines, map, fd);
 	close(fd);
 	if (i < lines - 2)
-		map = ft_resize_str_arr(map, lines, i);
+		map = str_array_resize(map, lines, i);
 	return (map);
 }

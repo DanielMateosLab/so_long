@@ -6,16 +6,31 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:22:01 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 17:53:47 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:28:38 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	found_exit(char **map, t_point size, t_point pos)
-// {
+int	found_exit(char **map, t_point *size, int x, int y)
+{
+	char	tile;
 
-// }
+	if (x >= size->x || y >= size->y)
+		return (0);
+	tile = map[y][x];
+	if (tile == MAP_EXIT)
+		return (1);
+	if (tile == MAP_WALL || tile == MAP_FLOOD)
+		return (0);
+	map[y][x] = MAP_FLOOD;
+	return (
+		found_exit(map, size, x + 1, y)
+		|| found_exit(map, size, x - 1, y)
+		|| found_exit(map, size, x, y + 1)
+		|| found_exit(map, size, x, y - 1)
+	);
+}
 
 void	save_begin(char **map, t_point *begin)
 {
@@ -45,9 +60,19 @@ int	has_exit(char **map, int w, int h)
 {
 	t_point	size;
 	t_point	begin;
+	char	**map_cpy;
 
 	size.x = w;
 	size.y = h;
 	save_begin(map, &begin);
+	map_cpy = str_array_copy(map);
+	if (
+		!found_exit(map, &size, begin.x - 1, begin.y)
+		|| !found_exit(map, &size, begin.x + 1, begin.y)
+		|| !found_exit(map, &size, begin.x, begin.y - 1)
+		|| !found_exit(map, &size, begin.x, begin.y + 1)
+	)
+		return (0);
+	// TODO: Reset flood cells
 	return (1);
 }

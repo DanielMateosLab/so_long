@@ -24,7 +24,7 @@ protected:
 	}
 
 	void TearDown() override {
-		ft_clear_str_arr(map);
+		str_array_clear(map);
 	}
 };
 
@@ -59,5 +59,5 @@ TEST(EmptyMap, NonNullPtr) {
 	const char path[] = "../../maps/empty.ber";
 	char **map = read_map(path);
 	ASSERT_NE(map, nullptr);
-	ft_clear_str_arr(map);
+	str_array_clear(map);
 }

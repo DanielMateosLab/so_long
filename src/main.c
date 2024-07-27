@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/26 20:14:25 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:28:28 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 	if (!game.map)
 		return (1);
 	if (!is_valid_map(game.map))
-		return (ft_clear_str_arr(game.map), 1);
+		return (str_array_clear(game.map), 1);
 	// if (!(game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 0)))
 	// {
 	// 	ft_printf("%s", mlx_strerror(mlx_errno));
