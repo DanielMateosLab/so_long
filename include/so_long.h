@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 15:16:16 by damateos         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:23:31 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
  at least one object and the initial position\n"
 # define PATH_ERR "Error\nThere is not a valid path\n"
 # define READ_MAP_ERR "Error\nError reading the map.\n"
+# define MAP_EXIT 'E'
+# define MAP_INITIAL_POS 'P'
+# define MAP_COLLECTABLE 'C'
+# define MAP_WALL '1'
+# define MAP_FLOOR '0'
 
 char	**read_map(const char *path);
 void	*ft_clear_str_arr(char **table);
