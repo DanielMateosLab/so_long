@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/28 00:06:26 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:53:06 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ typedef struct s_game
 {
 	mlx_t	*mlx;
 	char	**map;
+	int	width;
+	int	height;
+	int	curr_coll;
+	int	tot_coll;
+	int	movements;
 }	t_game;
 
 typedef struct s_validate_map_data

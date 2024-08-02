@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 18:28:28 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:26:37 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,33 @@ int	is_valid_extension(char *file_name)
 	return (ft_strncmp(file_name + ft_strlen(file_name) - 4, ".ber", 4) == 0);
 }
 
+void	set_map_metadata(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	game->width = ft_strlen(game->map[0]);
+	game->height = str_array_len(game->map);
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == MAP_COLLECTABLE)
+				game->tot_coll++;
+			j++;
+		}
+		i++;
+	}
+
+}
+
 int main(int argc, char **argv)
 {
 	t_game	game;
 
+	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
 		return (ft_printf(ARGC_ERR), 1);
 	if (!is_valid_extension(argv[1]))
@@ -54,6 +77,7 @@ int main(int argc, char **argv)
 		return (1);
 	if (!is_valid_map(game.map))
 		return (str_array_clear(game.map), 1);
+	set_map_metadata(&game);
 	// if (!(game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 0)))
 	// {
 	// 	ft_printf("%s", mlx_strerror(mlx_errno));
