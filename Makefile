@@ -9,6 +9,7 @@ BUILD_DIR = build
 
 SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c src/ft_str_arr.c
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
+HEADER = include/so_long.h
 
 LIBFT_DIR = libs/libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -21,6 +22,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_BUILD_DIR) -lmlx42 -lglfw
+
+$(OBJS): $(HEADER)
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
