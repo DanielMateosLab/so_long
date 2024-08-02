@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/02 18:53:06 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:04:39 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@
 # define FILE_PATH_ERR "Error\nNo file in the given path.\n"
 # define PATH_ERR "Error\nThe map can not be solved!\n"
 # define READ_MAP_ERR "Error\nError reading the map.\n"
+# define INIT_GAME_ERR "Error\nCouldn't initialize mlx.\n"
 # define MAP_EXIT 'E'
 # define MAP_INITIAL_POS 'P'
 # define MAP_COLLECTABLE 'C'
 # define MAP_WALL '1'
 # define MAP_FLOOR '0'
 # define MAP_FLOOD 'F'
+# define TILE_SIZE 64
 
 typedef struct s_game
 {

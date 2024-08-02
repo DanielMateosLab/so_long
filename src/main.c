@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/02 19:26:37 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:07:27 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ void	set_map_metadata(t_game *game)
 
 }
 
+int	init_game(t_game *game)
+{
+	game->mlx = mlx_init(game->width * TILE_SIZE, game->height * TILE_SIZE, "so_long", false);
+	if (!game->mlx)
+		return (ft_printf(INIT_GAME_ERR, 1));
+	mlx_loop_hook(game->mlx, ft_action_keys_hook, game->mlx);
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	t_game	game;
@@ -78,6 +89,7 @@ int main(int argc, char **argv)
 	if (!is_valid_map(game.map))
 		return (str_array_clear(game.map), 1);
 	set_map_metadata(&game);
+	return (init_game(&game));
 	// if (!(game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 0)))
 	// {
 	// 	ft_printf("%s", mlx_strerror(mlx_errno));
@@ -100,6 +112,5 @@ int main(int argc, char **argv)
 
 	// mlx_loop(game.mlx);
 	// mlx_terminate(game.mlx);
-	return (EXIT_SUCCESS);
 }
 
