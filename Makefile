@@ -7,7 +7,8 @@ CFLAGS = -Wall -Wextra -Werror -Iinclude
 NAME = so_long
 BUILD_DIR = build
 
-SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c src/ft_str_arr.c
+SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c src/ft_str_arr.c \
+		src/draw_floor.c
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 HEADER = include/so_long.h
 

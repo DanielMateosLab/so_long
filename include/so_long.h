@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/06 19:29:24 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:58:14 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@
 # define MAP_WALL '1'
 # define MAP_FLOOR '0'
 # define MAP_FLOOD 'F'
-# define TILE_SIZE 16
+# define BASE_TILE_SIZE 16
+# define TILE_SIZE 32
 
 typedef struct s_game
 {
@@ -64,6 +65,15 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
+typedef struct s_draw_floor_data
+{
+	mlx_texture_t	*texture;
+	mlx_image_t		*tiles_img;
+	mlx_image_t		*floor_img;
+	int				y;
+	int				x;
+}	t_draw_floor_data;
+
 char	**read_map(const char *path);
 char	**is_valid_map(char **map);
 void	save_begin(char **map, t_point *begin);
@@ -74,5 +84,6 @@ void	*str_array_clear(char **table);
 char	**str_array_copy(char **map);
 char	**str_array_resize(char **arr, size_t len, size_t new_len);
 size_t	str_array_len(char **arr);
+int		draw_floor(t_game *g);
 
 #endif

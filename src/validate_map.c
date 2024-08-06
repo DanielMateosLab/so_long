@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 19:57:35 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/02 19:24:11 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:46:28 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char	has_valid_tile_counts(char **map)
 	if (d.exits != 1 || d.collectables < 1 || d.initial_pos != 1)
 		return (
 			ft_printf(INVALID_TILES_COUNT_ERR),
-			ft_printf("\texit: %d, obj: %d, init: %d\n", d.exits, d.collectables, d.initial_pos),
+			ft_printf("\texit: %d, obj: %d, init: %d\n",
+				d.exits, d.collectables, d.initial_pos),
 			0);
 	return (1);
 }
