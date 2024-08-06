@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/02 20:04:39 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:29:24 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@
 # define MAP_WALL '1'
 # define MAP_FLOOR '0'
 # define MAP_FLOOD 'F'
-# define TILE_SIZE 64
+# define TILE_SIZE 16
 
 typedef struct s_game
 {
 	mlx_t	*mlx;
 	char	**map;
-	int	width;
-	int	height;
-	int	curr_coll;
-	int	tot_coll;
-	int	movements;
+	int		width;
+	int		height;
+	int		curr_coll;
+	int		tot_coll;
+	int		movements;
 }	t_game;
 
 typedef struct s_validate_map_data

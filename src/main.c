@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/02 20:07:27 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:33:28 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,74 @@ void	set_map_metadata(t_game *game)
 		}
 		i++;
 	}
+}
 
+int	get_pixel_i(t_point point, t_point delta, int width)
+{
+	return (((point.y * TILE_SIZE + delta.y) * width
+			+ (point.x * TILE_SIZE + delta.x)) * 4);
+}
+
+void	draw_tile(mlx_image_t *dest, mlx_image_t *src,
+		t_point src_p, t_point dst_p)
+{
+	t_point	dp;
+	int		i;
+
+	dp.y = 0;
+	while (dp.y < TILE_SIZE)
+	{
+		dp.x = 0;
+		while (dp.x < TILE_SIZE)
+		{
+			i = 4;
+			while (i--)
+				dest->pixels[get_pixel_i(dst_p, dp, dest->width) + i]
+					= src->pixels[get_pixel_i(src_p, dp, src->width) + i];
+			dp.x++;
+		}
+		dp.y++;
+	}
+}
+
+int pseudo_random(int x, int y)
+{
+	return ((x * 23 + y * 23 - y) % 7);
+}
+
+// TODO: adapt to different tile sizes, split in loader function and drawer function
+// using a struct
+int	draw_floor(t_game *g)
+{
+	mlx_texture_t	*floor_texture;
+	mlx_image_t		*floor_tiles_img;
+	mlx_image_t		*floor_image;
+	int				y;
+	int				x;
+
+	y = 0;
+	floor_texture = mlx_load_png("src/textures/floor.png");
+	if (!floor_texture)
+		return (ft_printf("Error loading floor texture"), 1);
+	floor_tiles_img = mlx_texture_to_image(g->mlx, floor_texture);
+	mlx_delete_texture(floor_texture);
+	floor_image = mlx_new_image(g->mlx, g->width * TILE_SIZE,
+			g->height * TILE_SIZE);
+	if (!floor_image || !floor_tiles_img)
+		return (ft_printf("Error loading floor image"), 1);
+	while (g->map[y])
+	{
+		x = 0;
+		while (g->map[y][x])
+		{
+			draw_tile(floor_image, floor_tiles_img,
+				(t_point){.x = pseudo_random(x, y), .y = 0}, (t_point){.x = x, .y = y});
+			x++;
+		}
+		y++;
+	}
+	mlx_image_to_window(g->mlx, floor_image, 0, 0);
+	return (0);
 }
 
 int	init_game(t_game *game)
@@ -68,6 +135,7 @@ int	init_game(t_game *game)
 	game->mlx = mlx_init(game->width * TILE_SIZE, game->height * TILE_SIZE, "so_long", false);
 	if (!game->mlx)
 		return (ft_printf(INIT_GAME_ERR, 1));
+	draw_floor(game);
 	mlx_loop_hook(game->mlx, ft_action_keys_hook, game->mlx);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
