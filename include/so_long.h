@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/06 21:58:14 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/06 22:01:43 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <fcntl.h>
 
-# include "../libs/libft/include/libft.h"
-# include "../libs/MLX42/include/MLX42/MLX42.h"
+# include "libft.h"
+# include "MLX42.h"
 
 # define ARGC_ERR "Error\nInvalid args. Usage: ./so_long FILE_PATH\n"
 # define FILE_EXT_ERR "Error\nInvalid map extension. Allowed: .ber\n"

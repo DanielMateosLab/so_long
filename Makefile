@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibs/libft/include -Ilibs/MLX42/include/MLX42
 # ifeq ($(shell uname -s),Darwin)
 #     CFLAGS += -framework Cocoa -framework OpenGL -framework IOKit
 # endif
