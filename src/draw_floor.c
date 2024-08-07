@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 21:44:18 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/07 17:39:46 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:56:41 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,19 @@ int	draw_floor(t_game *g)
 			draw_tile(d.floor_img, d.tiles_img,
 				(t_point){.x = pseudo_random(d.x, d.y), .y = 0},
 				(t_point){.x = d.x, .y = d.y});
+			// TODO: use a different img to draw the walls
+			if (g->map[d.y][d.x] == MAP_WALL)
+			{
+				if (d.y == 0 || d.y == g->height - 1
+					|| d.x == 0 || d.x == g->width - 1)
+					draw_tile(d.floor_img, d.tiles_img,
+						(t_point){.x = 11, .y = 0},
+						(t_point){.x = d.x, .y = d.y});
+				else
+					draw_tile(d.floor_img, d.tiles_img,
+						(t_point){.x = 12, .y = 0},
+						(t_point){.x = d.x, .y = d.y});
+			}
 			d.x++;
 		}
 		d.y++;
