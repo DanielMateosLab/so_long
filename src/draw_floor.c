@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 21:44:18 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/06 21:57:17 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:39:46 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	pseudo_random(int x, int y)
 int	initialize_draw_floor_data(t_draw_floor_data *data, t_game *g)
 {
 	ft_bzero(data, sizeof(t_draw_floor_data));
-	data->texture = mlx_load_png("src/textures/floor.png");
+	data->texture = mlx_load_png("src/textures/elements.png");
 	if (!data->texture)
 		return (ft_printf("Error loading floor texture"), 1);
 	data->tiles_img = mlx_texture_to_image(g->mlx, data->texture);
