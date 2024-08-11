@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/07 17:50:09 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/11 19:44:45 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@
 
 typedef struct s_game
 {
-	mlx_t	*mlx;
-	char	**map;
-	int		width;
-	int		height;
-	int		curr_coll;
-	int		tot_coll;
-	int		movements;
+	mlx_t			*mlx;
+	char			**map;
+	int				width;
+	int				height;
+	int				curr_coll;
+	int				tot_coll;
+	int				movements;
+	mlx_image_t		*elements_img;
 }	t_game;
 
 typedef struct s_validate_map_data
@@ -71,9 +72,8 @@ typedef struct s_point
 
 typedef struct s_draw_floor_data
 {
-	mlx_texture_t	*texture;
-	mlx_image_t		*tiles_img;
 	mlx_image_t		*floor_img;
+	mlx_image_t		*walls_img;
 	int				y;
 	int				x;
 }	t_draw_floor_data;
