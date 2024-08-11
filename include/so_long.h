@@ -88,6 +88,14 @@ void	*str_array_clear(char **table);
 char	**str_array_copy(char **map);
 char	**str_array_resize(char **arr, size_t len, size_t new_len);
 size_t	str_array_len(char **arr);
+// END TODO
+
+char	**read_map(const char *path);
+char	**is_valid_map(char **map);
+void	save_begin(char **map, t_point *begin);
+int		has_exit(char **map, int w, int h);
 int		draw_floor(t_game *g);
+int		get_pixel_i(t_point point, t_point delta, int width);
+int		pseudo_random(int x, int y);
 
 #endif
