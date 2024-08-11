@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 21:44:18 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/11 20:02:40 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/11 22:03:12 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	draw_tile(mlx_image_t *dest, mlx_image_t *src,
 		dp.x = 0;
 		while (dp.x < BASE_TILE_SIZE)
 		{
-			i = 4;
-			while (i--)
-				dest->pixels[get_pixel_i(dst_p, dp, dest->width) + i]
-					= src->pixels[get_pixel_i(src_p, dp, src->width) + i];
+			i = get_pixel_i(src_p, dp, src->width);
+			mlx_put_pixel(dest, dst_p.x * BASE_TILE_SIZE + dp.x,
+				dst_p.y * BASE_TILE_SIZE + dp.y,
+				src->pixels[i] << 24 | src->pixels[i + 1] << 16
+				| src->pixels[i + 2] << 8 | src->pixels[i + 3]);
 			dp.x++;
 		}
 		dp.y++;
