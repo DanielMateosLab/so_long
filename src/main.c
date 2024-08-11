@@ -91,7 +91,9 @@ int	main(int argc, char **argv)
 	if (!is_valid_map(game.map))
 		return (str_array_clear(game.map), 1);
 	set_map_metadata(&game);
-	return (init_game(&game));
+	if (init_game(&game) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	str_array_clear(game.map);
 	// if (!(game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 0)))
 	// {
 	// 	ft_printf("%s", mlx_strerror(mlx_errno));
