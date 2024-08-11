@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 18:22:48 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/27 23:07:38 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/11 19:26:55 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	*str_array_clear(char **table)
 {
 	size_t	i;
 
+	if (!table)
+		return (NULL);
 	i = 0;
 	while (table[i])
 		ft_free((void **)&table[i++]);
