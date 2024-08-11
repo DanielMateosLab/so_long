@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/11 19:44:45 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:07:11 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@
 # define MAP_FLOOR '0'
 # define MAP_FLOOD 'F'
 # define BASE_TILE_SIZE 16
-# define TILE_SIZE 32
+# ifndef TILE_SIZE
+#  define TILE_SIZE 32
+# endif
 # define COLL_TILE_START 7
 # define WALL_TILE_START 11
 # define EXIT_TILE_START 13
@@ -77,11 +79,6 @@ typedef struct s_draw_floor_data
 	int				y;
 	int				x;
 }	t_draw_floor_data;
-
-char	**read_map(const char *path);
-char	**is_valid_map(char **map);
-void	save_begin(char **map, t_point *begin);
-int		has_exit(char **map, int w, int h);
 
 // TODO: move to libft
 void	*str_array_clear(char **table);

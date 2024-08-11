@@ -1,8 +1,10 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibs/libft/include -Ilibs/MLX42/include/MLX42
-# ifeq ($(shell uname -s),Darwin)
-#     CFLAGS += -framework Cocoa -framework OpenGL -framework IOKit
-# endif
+
+# TODO: add dependency on tile size
+ifdef TILE_SIZE
+CFLAGS += -DTILE_SIZE=$(TILE_SIZE)
+endif
 
 NAME = so_long
 BUILD_DIR = build
