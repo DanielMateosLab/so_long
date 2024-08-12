@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/12 17:48:16 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:10:22 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int		pseudo_random(int x, int y);
 void	draw_tile(mlx_image_t *dest, mlx_image_t *src,
 			t_point src_p, t_point dst_p);
 int		draw_collectables(t_game *g);
+void	animate_collectables_hook(void *param);
 
 #endif

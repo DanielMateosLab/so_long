@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:12 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/12 17:55:01 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:10:12 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,24 @@ int	draw_collectables(t_game *g)
 		y++;
 	}
 	return (EXIT_SUCCESS);
+}
+
+void	animate_collectables_hook(void *param)
+{
+	t_game			*g;
+	static double	last_update = 0;
+	static int		i = 1;
+
+	g = param;
+	if (mlx_get_time() - last_update > 0.1)
+	{
+		draw_tile(g->collectables_img, g->elements_img,
+			(t_point){.x = COLL_TILE_START + i, .y = 0},
+			(t_point){.x = 0, .y = 0});
+		if (i == 3)
+			i = 0;
+		else
+			i++;
+		last_update = mlx_get_time();
+	}
 }
