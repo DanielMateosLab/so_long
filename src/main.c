@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/06 22:08:14 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:17:53 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ int	init_game(t_game *game)
 			game->height * TILE_SIZE, "so_long", false);
 	if (!game->mlx)
 		return (ft_printf(INIT_GAME_ERR, 1));
-	if (draw_floor(game) == 1)
-		return (1);
+	if (draw_floor(game) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (draw_collectables(game) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	mlx_loop_hook(game->mlx, ft_action_keys_hook, game->mlx);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
