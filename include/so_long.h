@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/12 18:10:22 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:44:14 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@
 # define EXIT_TILE_START 13
 # define ELEMENTS_COUNT 17
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
 typedef struct s_game
 {
 	mlx_t			*mlx;
@@ -56,6 +62,8 @@ typedef struct s_game
 	int				movements;
 	mlx_image_t		*elements_img;
 	mlx_image_t		*collectables_img;
+	mlx_image_t		*flag_img;
+	t_point			exit;
 }	t_game;
 
 typedef struct s_validate_map_data
@@ -66,12 +74,6 @@ typedef struct s_validate_map_data
 	int	collectables;
 	int	initial_pos;
 }	t_validate_map_data;
-
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
 
 typedef struct s_draw_floor_data
 {
@@ -98,6 +100,10 @@ int		pseudo_random(int x, int y);
 void	draw_tile(mlx_image_t *dest, mlx_image_t *src,
 			t_point src_p, t_point dst_p);
 int		draw_collectables(t_game *g);
-void	animate_collectables_hook(void *param);
+void	animate_collectables_and_flag_hook(void *param);
+int		draw_flag(t_game *g);
+void	str_array_loop_char(char **arr,
+			void (*fn)(char **arr, t_point pos, int *stop, void *),
+			void *param);
 
 #endif

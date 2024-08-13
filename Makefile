@@ -10,7 +10,7 @@ NAME = so_long
 BUILD_DIR = build
 
 SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c src/ft_str_arr.c \
-		src/draw_floor.c src/draw_utils.c src/draw_collectables.c
+		src/draw_floor.c src/draw_utils.c src/draw_collectables_and_flag.c
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 HEADER = include/so_long.h
 

@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:12 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/12 18:10:12 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:44:21 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,36 @@ int	draw_collectables(t_game *g)
 	return (EXIT_SUCCESS);
 }
 
-void	animate_collectables_hook(void *param)
+void	find_exit(char **arr, t_point pos, int *stop, void *param)
+{
+	t_point	*tile;
+
+	tile = param;
+	tile->x = -1;
+	tile->y = -1;
+	if (arr[pos.y][pos.x] == MAP_EXIT)
+	{
+		tile->x = pos.x;
+		tile->y = pos.y;
+		*stop = 1;
+	}
+}
+
+int	draw_flag(t_game *g)
+{
+	g->flag_img = mlx_new_image(g->mlx, TILE_SIZE, TILE_SIZE);
+	if (!g->flag_img)
+		return (ft_printf("Error creating flag image"), 1);
+	str_array_loop_char(g->map, find_exit, &g->exit);
+	draw_tile(g->flag_img, g->elements_img,
+		(t_point){.x = EXIT_TILE_START, .y = 0}, (t_point){.x = 0, .y = 0});
+	if (mlx_image_to_window(g->mlx, g->flag_img, g->exit.x * TILE_SIZE,
+			g->exit.y * TILE_SIZE) == -1)
+		return (ft_printf("Error drawing flag"), 1);
+	return (0);
+}
+
+void	animate_collectables_and_flag_hook(void *param)
 {
 	t_game			*g;
 	static double	last_update = 0;
@@ -49,6 +78,9 @@ void	animate_collectables_hook(void *param)
 	{
 		draw_tile(g->collectables_img, g->elements_img,
 			(t_point){.x = COLL_TILE_START + i, .y = 0},
+			(t_point){.x = 0, .y = 0});
+		draw_tile(g->flag_img, g->elements_img,
+			(t_point){.x = EXIT_TILE_START + i, .y = 0},
 			(t_point){.x = 0, .y = 0});
 		if (i == 3)
 			i = 0;
