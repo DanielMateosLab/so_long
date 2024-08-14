@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/14 18:43:37 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:12:19 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ typedef struct s_point
 	int	x;
 	int	y;
 }	t_point;
+
+typedef enum e_direction
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}	t_direction;
+
+typedef struct s_char_move
+{
+	double		initial_time;
+	// When time ends, we move the character to the target position
+	t_point		target_pos;
+	t_direction	direction;
+}	t_char_move;
 
 typedef struct s_game
 {
