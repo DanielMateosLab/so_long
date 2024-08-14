@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/13 18:44:14 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:43:37 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_game
 	mlx_image_t		*elements_img;
 	mlx_image_t		*collectables_img;
 	mlx_image_t		*flag_img;
+	mlx_image_t		*char_spritesheet;
+	mlx_image_t		*char_img;
 	t_point			exit;
 }	t_game;
 
@@ -105,5 +107,6 @@ int		draw_flag(t_game *g);
 void	str_array_loop_char(char **arr,
 			void (*fn)(char **arr, t_point pos, int *stop, void *),
 			void *param);
+int		draw_char(t_game *g);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_collectables.c                                :+:      :+:    :+:   */
+/*   draw_collectables_and_flag.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:12 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/13 18:44:21 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:29:08 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	draw_collectables(t_game *g)
 	y = 0;
 	g->collectables_img = mlx_new_image(g->mlx, TILE_SIZE, TILE_SIZE);
 	if (!g->collectables_img)
-		return (EXIT_FAILURE);
+		return (ft_printf("Error creating collectables image"), EXIT_FAILURE);
 	draw_tile(g->collectables_img, g->elements_img,
 		(t_point){.x = COLL_TILE_START, .y = 0}, (t_point){.x = 0, .y = 0});
 	while (g->map[y])
@@ -29,8 +29,11 @@ int	draw_collectables(t_game *g)
 		while (g->map[y][x])
 		{
 			if (g->map[y][x] == MAP_COLLECTABLE)
-				mlx_image_to_window(g->mlx, g->collectables_img,
-					TILE_SIZE * x, TILE_SIZE * y);
+			{
+				if (mlx_image_to_window(g->mlx, g->collectables_img,
+						TILE_SIZE * x, TILE_SIZE * y) == -1)
+					return (ft_printf("Error drawing collectables"), 1);
+			}
 			x++;
 		}
 		y++;

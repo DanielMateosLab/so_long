@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/13 18:44:14 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:46:52 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,10 @@ int	init_game(t_game *game)
 			game->height * TILE_SIZE, "so_long", false);
 	if (!game->mlx)
 		return (ft_printf(INIT_GAME_ERR, 1));
-	if (draw_floor(game) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (draw_collectables(game) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (draw_flag(game) == EXIT_FAILURE)
+	if (draw_floor(game) == EXIT_FAILURE
+		|| draw_collectables(game) == EXIT_FAILURE
+		|| draw_flag(game) == EXIT_FAILURE
+		|| draw_char(game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	mlx_loop_hook(game->mlx, animate_collectables_and_flag_hook, game);
 	mlx_loop_hook(game->mlx, ft_action_keys_hook, game->mlx);
@@ -99,27 +98,5 @@ int	main(int argc, char **argv)
 	if (init_game(&game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	str_array_clear(game.map);
-	// if (!(game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 0)))
-	// {
-	// 	ft_printf("%s", mlx_strerror(mlx_errno));
-	// 	return (EXIT_FAILURE);
-	// }
-	// if (!(image = mlx_new_image(game.mlx, 128, 128)))
-	// {
-	// 	mlx_close_window(game.mlx);
-	// 	ft_printf("%s", mlx_strerror(mlx_errno));
-	// 	return (EXIT_FAILURE);
-	// }
-	// if (mlx_image_to_window(game.mlx, image, 0, 0) == -1)
-	// {
-	// 	mlx_close_window(game.mlx);
-	// 	ft_printf("%s", mlx_strerror(mlx_errno));
-	// 	return (EXIT_FAILURE);
-	// }
-
-	// mlx_loop_hook(game.mlx, ft_action_keys_hook, game.mlx);
-
-	// mlx_loop(game.mlx);
-	// mlx_terminate(game.mlx);
 }
 
