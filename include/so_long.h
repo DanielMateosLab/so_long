@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 10:24:12 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:26:38 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ void	str_array_loop_char(char **arr,
 int		draw_player(t_game *g);
 void	start_player_movement(t_game *g, t_direction dir);
 void	move_player_hook(void *param);
+void	finish_move(t_game *g);
 
 #endif

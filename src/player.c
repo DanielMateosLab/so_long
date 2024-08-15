@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_char.c                                        :+:      :+:    :+:   */
+/*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:19:53 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 10:27:18 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:40:15 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,18 @@ void	start_player_movement(t_game *g, t_direction dir)
 		(t_point){.x = dir, .y = 1}, (t_point){.x = 0, .y = 0});
 }
 
-void	finish_move(t_game *g)
+void	animate_player(t_game *g, double dpx)
 {
-	g->player_move.moving = 0;
-	g->player_pos = g->player_move.target_pos;
-	g->player_img->instances[0].x = TILE_SIZE * g->player_pos.x;
-	g->player_img->instances[0].y = TILE_SIZE * g->player_pos.y;
-	draw_tile(g->player_img, g->player_spritesheet,
-		(t_point){.x = g->player_move.dir, .y = 0}, (t_point){.x = 0, .y = 0});
-	ft_printf("Movements: %d\n", g->movements++);
+	int	new_frame;
+
+	new_frame = dpx / (TILE_SIZE / FRAMES_PER_TILE);
+	if (g->player_move.frame != new_frame)
+	{
+		g->player_move.frame = new_frame;
+		draw_tile(g->player_img, g->player_spritesheet,
+			(t_point){.x = g->player_move.dir, .y = g->player_move.frame},
+			(t_point){.x = 0, .y = 0});
+	}
 }
 
 void	move_player_hook(void *param)
@@ -104,11 +107,5 @@ void	move_player_hook(void *param)
 		+ (g->player_move.dir == RIGHT) * dpx;
 	g->player_img->instances[0].y = TILE_SIZE * g->player_pos.y
 		- (g->player_move.dir == UP) * dpx + (g->player_move.dir == DOWN) * dpx;
-	if (g->player_move.frame != (int)(dpx / (TILE_SIZE / FRAMES_PER_TILE)))
-	{
-		g->player_move.frame = dpx / (TILE_SIZE / FRAMES_PER_TILE);
-		draw_tile(g->player_img, g->player_spritesheet,
-			(t_point){.x = g->player_move.dir, .y = g->player_move.frame},
-			(t_point){.x = 0, .y = 0});
-	}
+	animate_player(g, dpx);
 }
