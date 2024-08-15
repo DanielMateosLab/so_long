@@ -28,8 +28,8 @@ set(MLX_BUILD_DIR ${MLX_DIR}/build)
 
 include_directories(
 	"${PARENT_DIR}/include"
-	"${LIBFT_DIR}"
-	"${MLX_DIR}/include"
+	"${LIBFT_DIR}/include"
+	"${MLX_DIR}/include/MLX42"
 )
 
 # Main executable dor e2e tests
