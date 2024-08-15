@@ -5,4 +5,5 @@ a.*
 *.dSYM
 **/build/
 so_long
+so_long_bonus
 libs/libft/libft.a

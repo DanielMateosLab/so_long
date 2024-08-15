@@ -1,5 +1,6 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibs/libft/include -Ilibs/MLX42/include/MLX42
+CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibs/libft/include \
+	-Ilibs/MLX42/include/MLX42
 
 # TODO: add dependency on tile size
 ifdef TILE_SIZE
@@ -7,13 +8,20 @@ CFLAGS += -DTILE_SIZE=$(TILE_SIZE)
 endif
 
 NAME = so_long
+BONUS_NAME = so_long_bonus
 BUILD_DIR = build
 
-SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c src/ft_str_arr.c \
-		src/floor.c src/draw_utils.c src/collectables_and_flag.c \
-		src/player.c src/player2.c
-OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 HEADER = include/so_long.h
+SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c \
+	src/ft_str_arr.c src/floor.c src/draw_utils.c \
+	src/collectables_and_flag.c	src/player.c src/player2.c
+OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
+BONUS_SRCS = bonus_src/main_bonus.c bonus_src/read_map_bonus.c \
+	bonus_src/validate_map_bonus.c bonus_src/has_exit_bonus.c \
+	bonus_src/ft_str_arr_bonus.c bonus_src/floor_bonus.c \
+	bonus_src/draw_utils_bonus.c bonus_src/collectables_and_flag_bonus.c \
+	bonus_src/player_bonus.c bonus_src/player2_bonus.c
+BONUS_OBJS = $(BONUS_SRCS:%.c=$(BUILD_DIR)/%.o)
 
 LIBFT_DIR = libs/libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -22,12 +30,19 @@ MLX_DIR = libs/MLX42
 MLX_BUILD_DIR = $(MLX_DIR)/build
 MLX42 = $(MLX_BUILD_DIR)/libmlx42.a
 
-all: $(NAME)
+all: $(NAME) $(BONUS_NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX42)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_BUILD_DIR) -lmlx42 -lglfw
+	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft \
+		-L$(MLX_BUILD_DIR) -lmlx42 -lglfw
+
+$(BONUS_NAME): $(BONUS_OBJS) $(LIBFT) $(MLX42)
+	$(CC) $(CFLAGS) -o $@ $(BONUS_OBJS) -L$(LIBFT_DIR) -lft \
+		-L$(MLX_BUILD_DIR) -lmlx42 -lglfw
 
 $(OBJS): $(HEADER)
+
+$(BONUS_OBJS): $(HEADER)
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -45,11 +60,13 @@ clean:
 	make -C $(MLX_BUILD_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus: $(BONUS_NAME)
+
+.PHONY: all clean fclean re bonus
 
 deb: CFLAGS += -g3 -fsanitize=address
 deb: re
