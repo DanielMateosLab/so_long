@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   has_exit.c                                         :+:      :+:    :+:   */
+/*   has_exit_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:22:01 by damateos          #+#    #+#             */
-/*   Updated: 2024/07/28 00:01:57 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:10:32 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	are_exit_and_collectables_filled(char **map)
 {

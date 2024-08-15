@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 10:35:02 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:46:51 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	ft_action_keys_hook(void *param)
 {
@@ -59,6 +59,40 @@ void	set_map_metadata(t_game *game)
 	}
 }
 
+int	draw_collectables_counter(t_game *game)
+{
+	char	*count_str;
+	char	*formatted_msg;
+
+	if (game->count_overlay_img)
+		mlx_delete_image(game->mlx, game->count_overlay_img);
+	if (game->colls_count_img)
+		mlx_delete_image(game->mlx, game->colls_count_img);
+	count_str = ft_itoa(game->curr_coll);
+	if (!count_str)
+		return (ft_printf("Error creating collectables count string"),
+			EXIT_FAILURE);
+	formatted_msg = ft_strjoin("Collectables: ", count_str);
+	free(count_str);
+	if (!formatted_msg)
+		return (ft_printf("Error creating collectables count message"),
+			EXIT_FAILURE);
+	game->colls_count_img = mlx_put_string(game->mlx, formatted_msg, 0, 0);
+	free(formatted_msg);
+	if (!game->colls_count_img)
+		return (ft_printf("Error drawing collectables count"),
+			EXIT_FAILURE);
+	game->count_overlay_img = mlx_new_image(game->mlx,
+			game->colls_count_img->width, game->colls_count_img->height);
+	ft_memset(game->count_overlay_img->pixels, 100,
+		game->count_overlay_img->width * game->count_overlay_img->height * sizeof(int32_t));
+	if (mlx_image_to_window(game->mlx, game->count_overlay_img, 0, 0) == -1)
+		return (ft_printf("Error drawing collectables count overlay"),
+			EXIT_FAILURE);
+	game->count_overlay_img->instances[0].z -= 2;
+	return (EXIT_SUCCESS);
+}
+
 int	init_game(t_game *game)
 {
 	game->mlx = mlx_init(game->width * TILE_SIZE,
@@ -68,7 +102,8 @@ int	init_game(t_game *game)
 	if (draw_floor(game) == EXIT_FAILURE
 		|| draw_collectables(game) == EXIT_FAILURE
 		|| draw_flag(game) == EXIT_FAILURE
-		|| draw_player(game) == EXIT_FAILURE)
+		|| draw_player(game) == EXIT_FAILURE
+		|| draw_collectables_counter(game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	mlx_loop_hook(game->mlx, animate_collectables_and_flag_hook, game);
 	mlx_loop_hook(game->mlx, ft_action_keys_hook, game);

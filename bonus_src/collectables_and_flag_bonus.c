@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_collectables_and_flag.c                       :+:      :+:    :+:   */
+/*   collectables_and_flag_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:12 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/14 18:29:08 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:10:32 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	draw_collectables(t_game *g)
 {

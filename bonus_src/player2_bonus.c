@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player2.c                                          :+:      :+:    :+:   */
+/*   player2_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 11:26:19 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 11:37:30 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:49:27 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	pick_collectable(t_game *g)
 {
@@ -19,7 +19,7 @@ void	pick_collectable(t_game *g)
 
 	g->map[g->player_pos.y][g->player_pos.x] = MAP_FLOOR;
 	g->curr_coll++;
-	ft_printf("Collectables: %d/%d\n", g->curr_coll, g->tot_coll);
+	draw_collectables_counter(g);
 	i = 0;
 	coll_instances = g->collectables_img->instances;
 	while (i < g->collectables_img->count)
