@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 09:51:39 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:13:38 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define MAP_FLOOD 'F'
 # define BASE_TILE_SIZE 16
 # ifndef TILE_SIZE
-#  define TILE_SIZE 32
+#  define TILE_SIZE 24
 # endif
 # define COLL_TILE_START 7
 # define WALL_TILE_START 11
@@ -68,6 +68,7 @@ typedef struct s_char_move
 	// When time ends, we move the character to the target position
 	t_point		target_pos;
 	t_direction	dir;
+	int			frame;
 }	t_char_move;
 
 typedef struct s_game

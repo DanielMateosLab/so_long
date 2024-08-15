@@ -56,3 +56,6 @@ deb: re
 
 leaks: CFLAGS += -g3
 leaks: re
+
+run_leaks_mac: leaks
+	leaks --atExit -q -- ./$(NAME) maps/map3.ber
