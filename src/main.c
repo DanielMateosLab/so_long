@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 10:20:22 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:35:02 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	ft_action_keys_hook(void *param)
 	mlx = game->mlx;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (game->char_move.moving)
+	if (game->player_move.moving)
 		return ;
 	if (mlx_is_key_down(mlx, MLX_KEY_UP) || mlx_is_key_down(mlx, MLX_KEY_W))
-		start_chart_movement(game, UP);
+		start_player_movement(game, UP);
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN) || mlx_is_key_down(mlx, MLX_KEY_S))
-		start_chart_movement(game, DOWN);
+		start_player_movement(game, DOWN);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_A))
-		start_chart_movement(game, LEFT);
+		start_player_movement(game, LEFT);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mlx, MLX_KEY_D))
-		start_chart_movement(game, RIGHT);
+		start_player_movement(game, RIGHT);
 }
 
 int	is_valid_extension(char *file_name)
@@ -68,16 +68,17 @@ int	init_game(t_game *game)
 	if (draw_floor(game) == EXIT_FAILURE
 		|| draw_collectables(game) == EXIT_FAILURE
 		|| draw_flag(game) == EXIT_FAILURE
-		|| draw_char(game) == EXIT_FAILURE)
+		|| draw_player(game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	mlx_loop_hook(game->mlx, animate_collectables_and_flag_hook, game);
 	mlx_loop_hook(game->mlx, ft_action_keys_hook, game);
-	mlx_loop_hook(game->mlx, move_char_hook, game);
+	mlx_loop_hook(game->mlx, move_player_hook, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 	return (0);
 }
 
+// TODO: use mlx42 from campus source, remove test folder before submitting
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -97,4 +98,3 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	str_array_clear(game.map);
 }
-

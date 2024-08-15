@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 10:13:38 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:24:12 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ typedef struct s_game
 	mlx_image_t		*elements_img;
 	mlx_image_t		*collectables_img;
 	mlx_image_t		*flag_img;
-	mlx_image_t		*char_spritesheet;
-	mlx_image_t		*char_img;
+	mlx_image_t		*player_spritesheet;
+	mlx_image_t		*player_img;
 	t_point			exit;
-	t_char_move		char_move;
-	t_point			char_pos;
+	t_char_move		player_move;
+	t_point			player_pos;
 }	t_game;
 
 typedef struct s_validate_map_data
@@ -129,8 +129,8 @@ int		draw_flag(t_game *g);
 void	str_array_loop_char(char **arr,
 			void (*fn)(char **arr, t_point pos, int *stop, void *),
 			void *param);
-int		draw_char(t_game *g);
-void	start_chart_movement(t_game *g, t_direction dir);
-void	move_char_hook(void *param);
+int		draw_player(t_game *g);
+void	start_player_movement(t_game *g, t_direction dir);
+void	move_player_hook(void *param);
 
 #endif

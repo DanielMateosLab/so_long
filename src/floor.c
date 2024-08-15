@@ -6,12 +6,11 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 21:44:18 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/13 18:40:20 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:28:13 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 int	initialize_draw_floor_data(t_draw_floor_data *d, t_game *g)
 {
