@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/14 20:12:19 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 09:51:39 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define WALL_TILE_START 11
 # define EXIT_TILE_START 13
 # define ELEMENTS_COUNT 17
+# define FRAMES_PER_TILE 4
+# define TILES_PER_SECOND 0.25
 
 typedef struct s_point
 {
@@ -53,18 +55,19 @@ typedef struct s_point
 
 typedef enum e_direction
 {
-	UP,
 	DOWN,
+	UP,
 	LEFT,
 	RIGHT
 }	t_direction;
 
 typedef struct s_char_move
 {
+	int			moving;
 	double		initial_time;
 	// When time ends, we move the character to the target position
 	t_point		target_pos;
-	t_direction	direction;
+	t_direction	dir;
 }	t_char_move;
 
 typedef struct s_game
@@ -82,6 +85,8 @@ typedef struct s_game
 	mlx_image_t		*char_spritesheet;
 	mlx_image_t		*char_img;
 	t_point			exit;
+	t_char_move		char_move;
+	t_point			char_pos;
 }	t_game;
 
 typedef struct s_validate_map_data
@@ -124,5 +129,7 @@ void	str_array_loop_char(char **arr,
 			void (*fn)(char **arr, t_point pos, int *stop, void *),
 			void *param);
 int		draw_char(t_game *g);
+void	start_chart_movement(t_game *g, t_direction dir);
+void	move_char_hook(void *param);
 
 #endif

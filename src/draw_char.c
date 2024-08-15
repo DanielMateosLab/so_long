@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:19:53 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/14 18:46:17 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 09:50:09 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	find_character(char **arr, t_point pos, int *stop, void *param)
 
 int	draw_char(t_game *g)
 {
-	t_point			initial_pos;
 	mlx_texture_t	*texture;
 
 	texture = mlx_load_png("src/textures/char.png");
@@ -47,10 +46,55 @@ int	draw_char(t_game *g)
 			g->char_spritesheet,
 			g->char_spritesheet->width * TILE_SIZE / BASE_TILE_SIZE,
 			g->char_spritesheet->height * TILE_SIZE / BASE_TILE_SIZE);
-	str_array_loop_char(g->map, find_character, &initial_pos);
+	str_array_loop_char(g->map, find_character, &g->char_pos);
 	draw_tile(g->char_img, g->char_spritesheet,
 		(t_point){.x = 0, .y = 0}, (t_point){.x = 0, .y = 0});
-	mlx_image_to_window(g->mlx, g->char_img,
-		TILE_SIZE * initial_pos.x, TILE_SIZE * initial_pos.y);
+	if (mlx_image_to_window(g->mlx, g->char_img,
+			TILE_SIZE * g->char_pos.x, TILE_SIZE * g->char_pos.y) == -1)
+		return (ft_printf("Error drawing character"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
+}
+
+void	start_chart_movement(t_game *g, t_direction dir)
+{
+	t_point	new_pos;
+
+	new_pos = (t_point){
+		.x = g->char_pos.x - (dir == LEFT) + (dir == RIGHT),
+		.y = g->char_pos.y - (dir == UP) + (dir == DOWN)};
+	if (g->map[new_pos.y][new_pos.x] == MAP_WALL)
+		return ;
+	g->char_move.moving = 1;
+	g->char_move.dir = dir;
+	g->char_move.initial_time = mlx_get_time();
+	g->char_move.target_pos.x = new_pos.x;
+	g->char_move.target_pos.y = new_pos.y;
+}
+
+void	move_char_hook(void *param)
+{
+	t_game		*g;
+	double		speed;
+	double		dtime;
+	double		dpx;
+
+	g = param;
+	if (!g->char_move.moving)
+		return ;
+	dtime = mlx_get_time() - g->char_move.initial_time;
+	if (dtime >= TILES_PER_SECOND)
+	{
+		g->char_move.moving = 0;
+		g->char_pos = g->char_move.target_pos;
+		g->char_img->instances[0].x = TILE_SIZE * g->char_pos.x;
+		g->char_img->instances[0].y = TILE_SIZE * g->char_pos.y;
+		ft_printf("Movements: %d\n", g->movements++);
+		return ;
+	}
+	speed = TILE_SIZE / TILES_PER_SECOND;
+	dpx = dtime * speed;
+	g->char_img->instances[0].x = TILE_SIZE * g->char_pos.x
+		- (g->char_move.dir == LEFT) * dpx + (g->char_move.dir == RIGHT) * dpx;
+	g->char_img->instances[0].y = TILE_SIZE * g->char_pos.y
+		- (g->char_move.dir == UP) * dpx + (g->char_move.dir == DOWN) * dpx;
 }

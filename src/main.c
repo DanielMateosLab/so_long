@@ -6,34 +6,31 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/14 18:46:52 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/15 09:47:46 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-// TODO: remove stdio
-#include <stdio.h>
-
-#define WIDTH 512
-#define HEIGHT 512
-
-static mlx_image_t *image;
 
 void	ft_action_keys_hook(void *param)
 {
+	t_game	*game;
 	mlx_t	*mlx;
 
-	mlx = param;
+	game = param;
+	mlx = game->mlx;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
+	if (game->char_move.moving)
+		return ;
 	if (mlx_is_key_down(mlx, MLX_KEY_UP) || mlx_is_key_down(mlx, MLX_KEY_W))
-		image->instances[0].y -= 5;
+		start_chart_movement(game, UP);
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN) || mlx_is_key_down(mlx, MLX_KEY_S))
-		image->instances[0].y += 5;
+		start_chart_movement(game, DOWN);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_A))
-		image->instances[0].x -= 5;
+		start_chart_movement(game, LEFT);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mlx, MLX_KEY_D))
-		image->instances[0].x += 5;
+		start_chart_movement(game, RIGHT);
 }
 
 int	is_valid_extension(char *file_name)
@@ -74,7 +71,8 @@ int	init_game(t_game *game)
 		|| draw_char(game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	mlx_loop_hook(game->mlx, animate_collectables_and_flag_hook, game);
-	mlx_loop_hook(game->mlx, ft_action_keys_hook, game->mlx);
+	mlx_loop_hook(game->mlx, ft_action_keys_hook, game);
+	mlx_loop_hook(game->mlx, move_char_hook, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 	return (0);
