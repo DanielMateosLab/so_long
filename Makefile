@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibs/libft/include \
 
 # TODO: add dependency on tile size
 ifdef TILE_SIZE
-CFLAGS += -DTILE_SIZE=$(TILE_SIZE)
+	CFLAGS += -DTILE_SIZE=$(TILE_SIZE)
 endif
 
 NAME = so_long
@@ -30,7 +30,8 @@ MLX_DIR = libs/MLX42
 MLX_BUILD_DIR = $(MLX_DIR)/build
 MLX42 = $(MLX_BUILD_DIR)/libmlx42.a
 
-all: $(NAME) $(BONUS_NAME)
+all: $(NAME)
+bonus: $(BONUS_NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft \
@@ -63,8 +64,6 @@ fclean: clean
 	rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all
-
-bonus: $(BONUS_NAME)
 
 .PHONY: all clean fclean re bonus
 
