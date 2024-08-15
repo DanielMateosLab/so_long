@@ -11,17 +11,20 @@ NAME = so_long
 BONUS_NAME = so_long_bonus
 BUILD_DIR = build
 
-HEADER = include/so_long.h
 SRCS = src/main.c src/read_map.c src/validate_map.c src/has_exit.c \
 	src/ft_str_arr.c src/floor.c src/draw_utils.c \
 	src/collectables_and_flag.c	src/player.c src/player2.c
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
+HEADER = include/so_long.h
+
 BONUS_SRCS = bonus_src/main_bonus.c bonus_src/read_map_bonus.c \
 	bonus_src/validate_map_bonus.c bonus_src/has_exit_bonus.c \
 	bonus_src/ft_str_arr_bonus.c bonus_src/floor_bonus.c \
 	bonus_src/draw_utils_bonus.c bonus_src/collectables_and_flag_bonus.c \
-	bonus_src/player_bonus.c bonus_src/player2_bonus.c
+	bonus_src/player_bonus.c bonus_src/player2_bonus.c \
+	bonus_src/counter_bonus.c
 BONUS_OBJS = $(BONUS_SRCS:%.c=$(BUILD_DIR)/%.o)
+BONUS_HEADER = include/so_long_bonus.h
 
 LIBFT_DIR = libs/libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -43,7 +46,7 @@ $(BONUS_NAME): $(BONUS_OBJS) $(LIBFT) $(MLX42)
 
 $(OBJS): $(HEADER)
 
-$(BONUS_OBJS): $(HEADER)
+$(BONUS_OBJS): $(BONUS_HEADER)
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -72,6 +75,10 @@ deb: re
 
 leaks: CFLAGS += -g3
 leaks: re
+
+bonus_leaks: CFLAGS += -g3
+bonus_leaks: bonus
+	leaks --atExit -q -- ./$(BONUS_NAME) maps/map3.ber
 
 run_leaks_mac: leaks
 	leaks --atExit -q -- ./$(NAME) maps/map3.ber
