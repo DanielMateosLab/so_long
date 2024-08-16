@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/16 13:31:13 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:32:24 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	init_game(t_game *game)
 	return (0);
 }
 
-// TODO: use mlx42 from campus source, remove test folder before submitting
 int	main(int argc, char **argv)
 {
 	t_game	game;

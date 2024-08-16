@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 19:57:35 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 17:10:41 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:49:28 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,13 @@ char	has_forbidden_components(char **map)
 		while (map[i][j])
 		{
 			if (!ft_char_any_of(map[i][j],
-				5,
+				6,
 				MAP_FLOOR,
 				MAP_WALL,
 				MAP_COLLECTABLE,
 				MAP_EXIT,
-				MAP_INITIAL_POS))
+				MAP_INITIAL_POS,
+				MAP_ENEMY_PATROL))
 				return (map[i][j]);
 			j++;
 		}

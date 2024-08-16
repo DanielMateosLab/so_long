@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/16 13:31:13 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:29:21 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@
 # define MAP_WALL '1'
 # define MAP_FLOOR '0'
 # define MAP_FLOOD 'F'
+# define MAP_ENEMY_PATROL 'X'
 # define BASE_TILE_SIZE 16
 # define TILE_SIZE 24
 # define COLL_TILE_START 7
 # define WALL_TILE_START 11
 # define EXIT_TILE_START 13
-# define ELEMENTS_COUNT 17
+# define ENEMY_TILE_START 17
+# define ELEMENTS_COUNT 18
 # define FRAMES_PER_TILE 4
 # define TILES_PER_SECOND 0.25
 
@@ -63,10 +65,10 @@ typedef struct s_char_move
 {
 	int			moving;
 	double		initial_time;
-	// When time ends, we move the character to the target position
 	t_point		target_pos;
 	t_direction	dir;
 	int			frame;
+	int			enemy_target;
 }	t_char_move;
 
 typedef struct s_game
@@ -85,6 +87,8 @@ typedef struct s_game
 	mlx_image_t		*player_img;
 	mlx_image_t		*colls_count_img;
 	mlx_image_t		*count_overlay_img;
+	mlx_image_t		*floor_img;
+	mlx_image_t		*walls_img;
 	t_point			exit;
 	t_char_move		player_move;
 	t_point			player_pos;
@@ -98,14 +102,6 @@ typedef struct s_validate_map_data
 	int	collectables;
 	int	initial_pos;
 }	t_validate_map_data;
-
-typedef struct s_draw_floor_data
-{
-	mlx_image_t		*floor_img;
-	mlx_image_t		*walls_img;
-	int				y;
-	int				x;
-}	t_draw_floor_data;
 
 void	*str_array_clear(char **table);
 char	**str_array_copy(char **map);
@@ -124,7 +120,7 @@ int		draw_collectables(t_game *g);
 void	animate_collectables_and_flag_hook(void *param);
 int		draw_flag(t_game *g);
 void	str_array_loop_char(char **arr,
-			void (*fn)(char **arr, t_point pos, int *stop, void *),
+			void (*fn)(char **arr, t_point pos, int *stop, void *param),
 			void *param);
 int		draw_player(t_game *g);
 void	start_player_movement(t_game *g, t_direction dir);

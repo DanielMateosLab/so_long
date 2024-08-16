@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:22:01 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 17:10:32 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:44:35 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	flood_fill(char **map, t_point *size, int x, int y)
 	if (x >= size->x || y >= size->y)
 		return ;
 	tile = map[y][x];
-	if (tile == MAP_WALL || tile == MAP_FLOOD)
+	if (tile == MAP_WALL || tile == MAP_FLOOD || tile == MAP_ENEMY_PATROL)
 		return ;
 	map[y][x] = MAP_FLOOD;
 	flood_fill(map, size, x + 1, y);

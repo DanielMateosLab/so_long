@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 18:22:48 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/13 18:07:26 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:15:34 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**str_array_copy(char **arr)
 }
 
 void	str_array_loop_char(char **arr,
-	void (*fn)(char **arr, t_point pos, int *stop, void *), void *param)
+	void (*fn)(char **arr, t_point pos, int *stop, void *param), void *param)
 {
 	int	x;
 	int	y;

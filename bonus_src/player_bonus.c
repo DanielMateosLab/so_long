@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:19:53 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 17:10:32 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:59:05 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	start_player_movement(t_game *g, t_direction dir)
 		.y = g->player_pos.y - (dir == UP) + (dir == DOWN)};
 	if (g->map[new_pos.y][new_pos.x] == MAP_WALL)
 		return ;
+	if (g->map[new_pos.y][new_pos.x] == MAP_ENEMY_PATROL)
+		g->player_move.enemy_target = 1;
 	g->player_move.moving = 1;
 	g->player_move.dir = dir;
 	g->player_move.initial_time = mlx_get_time();
@@ -100,6 +102,9 @@ void	move_player_hook(void *param)
 	dtime = mlx_get_time() - g->player_move.initial_time;
 	if (dtime >= TILES_PER_SECOND)
 		return (finish_move(g));
+	if (dtime >= 0.25 * TILES_PER_SECOND && g->player_move.enemy_target)
+		return (ft_printf("Game over! Touched enemy patrol.\n"),
+			mlx_close_window(g->mlx));
 	speed = TILE_SIZE / TILES_PER_SECOND;
 	dpx = dtime * speed;
 	g->player_img->instances[0].x = TILE_SIZE * g->player_pos.x

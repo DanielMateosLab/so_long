@@ -72,8 +72,10 @@ leaks: CFLAGS += -g3
 leaks: re
 
 bonus_leaks: CFLAGS += -g3
-bonus_leaks: bonus
-	leaks --atExit -q -- ./$(BONUS_NAME) maps/map3.ber
+bonus_leaks: fclean bonus
+
+run_bonus_leaks: bonus
+	leaks --atExit -q -- ./$(BONUS_NAME) maps/enemy_patrol.ber
 
 run_leaks_mac: leaks
 	leaks --atExit -q -- ./$(NAME) maps/map3.ber

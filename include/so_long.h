@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/16 12:06:25 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:29:03 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define COLL_TILE_START 7
 # define WALL_TILE_START 11
 # define EXIT_TILE_START 13
-# define ELEMENTS_COUNT 17
+# define ELEMENTS_COUNT 18
 # define FRAMES_PER_TILE 4
 # define TILES_PER_SECOND 0.25
 
@@ -63,7 +63,6 @@ typedef struct s_char_move
 {
 	int			moving;
 	double		initial_time;
-	// When time ends, we move the character to the target position
 	t_point		target_pos;
 	t_direction	dir;
 	int			frame;
@@ -122,7 +121,7 @@ int		draw_collectables(t_game *g);
 void	animate_collectables_and_flag_hook(void *param);
 int		draw_flag(t_game *g);
 void	str_array_loop_char(char **arr,
-			void (*fn)(char **arr, t_point pos, int *stop, void *),
+			void (*fn)(char **arr, t_point pos, int *stop, void *param),
 			void *param);
 int		draw_player(t_game *g);
 void	start_player_movement(t_game *g, t_direction dir);
