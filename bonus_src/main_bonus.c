@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:54:44 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 17:55:46 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:31:13 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_game(t_game *game)
 		|| draw_collectables(game) == EXIT_FAILURE
 		|| draw_flag(game) == EXIT_FAILURE
 		|| draw_player(game) == EXIT_FAILURE
-		|| draw_collectables_counter(game) == EXIT_FAILURE)
+		|| draw_counter(game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	mlx_loop_hook(game->mlx, animate_collectables_and_flag_hook, game);
 	mlx_loop_hook(game->mlx, ft_action_keys_hook, game);

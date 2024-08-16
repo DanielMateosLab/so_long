@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 11:26:19 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 11:37:30 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:34:07 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	finish_move(t_game *g)
 	g->player_pos = g->player_move.target_pos;
 	g->player_img->instances[0].x = TILE_SIZE * g->player_pos.x;
 	g->player_img->instances[0].y = TILE_SIZE * g->player_pos.y;
+	g->movements++;
 	if (g->map[g->player_pos.y][g->player_pos.x] == MAP_COLLECTABLE)
 		pick_collectable(g);
 	if (g->map[g->player_pos.y][g->player_pos.x] == MAP_EXIT
@@ -45,5 +46,5 @@ void	finish_move(t_game *g)
 				g->movements), mlx_close_window(g->mlx));
 	draw_tile(g->player_img, g->player_spritesheet,
 		(t_point){.x = g->player_move.dir, .y = 0}, (t_point){.x = 0, .y = 0});
-	ft_printf("Movements: %d\n", g->movements++);
+	ft_printf("Movements: %d\n", g->movements);
 }

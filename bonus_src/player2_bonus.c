@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 11:26:19 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 17:49:27 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:33:49 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	pick_collectable(t_game *g)
 
 	g->map[g->player_pos.y][g->player_pos.x] = MAP_FLOOR;
 	g->curr_coll++;
-	draw_collectables_counter(g);
+	ft_printf("Collectables: %d/%d\n", g->curr_coll, g->tot_coll);
 	i = 0;
 	coll_instances = g->collectables_img->instances;
 	while (i < g->collectables_img->count)
@@ -37,6 +37,7 @@ void	finish_move(t_game *g)
 	g->player_pos = g->player_move.target_pos;
 	g->player_img->instances[0].x = TILE_SIZE * g->player_pos.x;
 	g->player_img->instances[0].y = TILE_SIZE * g->player_pos.y;
+	g->movements++;
 	if (g->map[g->player_pos.y][g->player_pos.x] == MAP_COLLECTABLE)
 		pick_collectable(g);
 	if (g->map[g->player_pos.y][g->player_pos.x] == MAP_EXIT
@@ -45,5 +46,5 @@ void	finish_move(t_game *g)
 				g->movements), mlx_close_window(g->mlx));
 	draw_tile(g->player_img, g->player_spritesheet,
 		(t_point){.x = g->player_move.dir, .y = 0}, (t_point){.x = 0, .y = 0});
-	ft_printf("Movements: %d\n", g->movements++);
+	draw_counter(g);
 }

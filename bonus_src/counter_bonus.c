@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 17:55:38 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/15 18:20:25 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:31:13 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*generate_count_msg(t_game *game)
 	char	*count_str;
 	char	*formatted_msg;
 
-	count_str = ft_itoa(game->curr_coll);
+	count_str = ft_itoa(game->movements);
 	if (!count_str)
 		return (NULL);
-	formatted_msg = ft_strjoin("Collectables: ", count_str);
+	formatted_msg = ft_strjoin("Movements: ", count_str);
 	free(count_str);
 	if (!formatted_msg)
 		return (NULL);
@@ -50,13 +50,13 @@ int	put_overlay_img(t_game *game)
 		i += 4;
 	}
 	if (mlx_image_to_window(game->mlx, img, 0, 0) == -1)
-		return (ft_printf("Error drawing collectables count overlay"),
+		return (ft_printf("Error drawing count overlay"),
 			EXIT_FAILURE);
 	img->instances[0].z = game->colls_count_img->instances[0].z - 1;
 	return (EXIT_SUCCESS);
 }
 
-int	draw_collectables_counter(t_game *game)
+int	draw_counter(t_game *game)
 {
 	char	*formatted_msg;
 
@@ -70,7 +70,7 @@ int	draw_collectables_counter(t_game *game)
 	game->colls_count_img = mlx_put_string(game->mlx, formatted_msg, 0, 0);
 	free(formatted_msg);
 	if (!game->colls_count_img)
-		return (ft_printf("Error drawing collectables count"),
+		return (ft_printf("Error drawing count img"),
 			EXIT_FAILURE);
 	if (put_overlay_img(game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

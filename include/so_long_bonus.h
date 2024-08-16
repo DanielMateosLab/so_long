@@ -6,12 +6,12 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/16 12:06:33 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:31:13 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <fcntl.h>
 
@@ -130,6 +130,6 @@ int		draw_player(t_game *g);
 void	start_player_movement(t_game *g, t_direction dir);
 void	move_player_hook(void *param);
 void	finish_move(t_game *g);
-int		draw_collectables_counter(t_game *game);
+int		draw_counter(t_game *game);
 
 #endif
