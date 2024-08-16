@@ -6,7 +6,7 @@
 /*   By: damateos <damateos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:43:49 by damateos          #+#    #+#             */
-/*   Updated: 2024/08/16 14:29:03 by damateos         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:55:04 by damateos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define MAP_FLOOR '0'
 # define MAP_FLOOD 'F'
 # define BASE_TILE_SIZE 16
-# define TILE_SIZE 24
+# define TILE_SIZE 36
 # define COLL_TILE_START 7
 # define WALL_TILE_START 11
 # define EXIT_TILE_START 13
