@@ -2,11 +2,6 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibs/libft/include \
 	-Ilibs/MLX42/include/MLX42
 
-# TODO: add dependency on tile size
-ifdef TILE_SIZE
-	CFLAGS += -DTILE_SIZE=$(TILE_SIZE)
-endif
-
 NAME = so_long
 BONUS_NAME = so_long_bonus
 BUILD_DIR = build
